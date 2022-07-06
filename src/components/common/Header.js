@@ -24,13 +24,18 @@ const Header = () => {
               <a
                 className="nav-link active text-light h5"
                 aria-current="page"
-                href="/get"
+                href="/"
               >
                 RSS-22
               </a>
             </li>
             <li class="nav-item">
-              <a className="nav-link text-light h5 mx-2" href="/ajout">
+              <a class="nav-link text-light h5 mx-2" href="/items">
+                Articles
+              </a>
+            </li>
+            <li class="nav-item">
+              <a className="nav-link text-light h5 mx-2" href="/item">
                 Ajouter
               </a>
             </li>
