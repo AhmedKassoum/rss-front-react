@@ -71,7 +71,7 @@ const ItemForm = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name="imgUrl"
+                name="image.url"
                 value={props.item.image.url}
                 onChange={props.onChange}
               />
@@ -82,7 +82,7 @@ const ItemForm = (props) => {
               <label>Type</label>
               <select
                 className="form-control"
-                name="imgType"
+                name="image.type"
                 value={props.item.image.type}
                 onChange={props.onChange}
               >
@@ -97,10 +97,10 @@ const ItemForm = (props) => {
             <div className="form-group">
               <label>Taille</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                name="imgTaille"
-                value={props.item.image.taille}
+                name="image.taille"
+                value={props.item.imgTaille}
                 onChange={props.onChange}
               />
             </div>
@@ -113,7 +113,7 @@ const ItemForm = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name="imgDescription"
+                name="image.description"
                 value={props.item.image.description}
                 onChange={props.onChange}
               />
@@ -137,7 +137,7 @@ const ItemForm = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name="url"
+                name="content.url"
                 value={props.item.content.url}
                 onChange={props.onChange}
               />
@@ -157,7 +157,7 @@ const ItemForm = (props) => {
                 value={props.item.content.type}
                 onChange={props.onChange}
                 className="form-control"
-                name="contentType"
+                name="content.type"
               >
                 <option value={"text"}>Text</option>
                 <option value={"src"}>SRC</option>
@@ -170,7 +170,7 @@ const ItemForm = (props) => {
             <div className="form-group">
               <label>Description</label>
               <textarea
-                name="content"
+                name="content.content"
                 className="form-control"
                 rows={3}
                 value={props.item.content.content}
@@ -189,7 +189,7 @@ const ItemForm = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name="name"
+                name="creator.name"
                 value={props.item.creator.name}
                 onChange={props.onChange}
               />
@@ -208,7 +208,7 @@ const ItemForm = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name="mail"
+                name="creator.mail"
                 value={props.item.creator.mail}
                 onChange={props.onChange}
               />
@@ -225,7 +225,7 @@ const ItemForm = (props) => {
             <div className="form-group">
               <label>Type</label>
               <select
-                name="creatorType"
+                name="creator.type"
                 className="form-control"
                 value={props.item.creator.type}
                 onChange={props.onChange}
@@ -241,7 +241,7 @@ const ItemForm = (props) => {
               <input
                 type="text"
                 className="form-control"
-                name={props.item.creator.uri}
+                name="creator.uri"
                 value={props.item.creator.uri}
                 onChange={props.onChange}
               />

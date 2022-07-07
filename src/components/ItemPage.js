@@ -26,7 +26,7 @@ const ItemPage = () => {
           <tbody>
             {
                 items.map((item)=>(
-                    <ItemList item={item} />
+                    <ItemList item={item} key={item.guid} />
                 ))
             }
           </tbody>

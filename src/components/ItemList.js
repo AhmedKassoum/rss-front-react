@@ -13,10 +13,10 @@ const ItemList = (props) => {
       <td>
         <div className="row-cols-2">
           <a className="btn btn-sm" href={"/item-details/" + props.guid}>
-            <i class="fa fa-solid fa-eye"></i>
+            <i className="fa fa-solid fa-eye"></i>
           </a>
           <a className="btn btn-sm" href={"/item-details/" + props.guid}>
-            <i class="fa fa-duotone fa-trash"></i>
+            <i className="fa fa-duotone fa-trash"></i>
           </a>
         </div>
       </td>

@@ -1,60 +1,104 @@
-import React, {  useState } from "react";
-//import * as itemApi from "../api/itemApi";
+import produce from "immer";
+import { has, set } from "lodash";
+import React, { useEffect, useReducer } from "react";
+import * as itemApi from "../api/itemApi";
 import ItemForm from "./ItemForm";
 
-const ManageItem = (props) => {
-  const [item, setItem] = useState({
-    guid: null,
-    title: "",
-    category: "",
-    dateType: "",
-    date: Date(),
-    image: {
-      url: "",
-      type: "",
-      description: "",
-      taille: 0,
-    },
-    content: {
-      url: "",
-      type: "",
-      content: "",
-    },
-    creator: {
-      type: "",
-      name: "",
-      mail: "",
-      uri: "",
-    },
-  });
+function enchancedReducer(state, updateArg) {
+  if (updateArg.constructor === Function) {
+    return { ...state, ...updateArg(state) };
+  }
 
-  /*useEffect(() => {
+  if (updateArg.constructor === Object) {
+    // does the update object have _path and _value as it's keys
+    // if yes then use them to update deep object values
+    if (has(updateArg, "_path") && has(updateArg, "_value")) {
+      const { _path, _value } = updateArg;
+
+      return produce(state, (draft) => {
+        set(draft, _path, _value);
+      });
+    } else {
+      return { ...state, ...updateArg };
+    }
+  }
+}
+
+const initialState = {
+  guid: null,
+  title: "",
+  category: "",
+  dateType: "",
+  date: Date(),
+  image: {
+    url: "",
+    type: "",
+    description: "",
+    taille: 0,
+  },
+  content: {
+    url: "",
+    type: "",
+    content: "",
+  },
+  creator: {
+    type: "",
+    name: "",
+    mail: "",
+    uri: "",
+  },
+};
+
+const ManageItem = (props) => {
+  
+
+  const [state, updateState] = useReducer(enchancedReducer, initialState);
+
+  const updatedForm = React.useCallback(({ target: { value, name, type } }) => {
+    const updatePath = name.split(".");
+    if (updatePath.length === 1) {
+      const [key] = updatePath;
+
+      updateState({
+        [key]: value,
+      });
+    }
+
+    if (updatePath.length === 2) {
+      updateState({
+        _path: updatePath,
+        _value: value,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     const guid = props.match.params.guid;
     if (guid) {
-      itemApi.getItemByGuid(guid).then((_item) => setItem(_item));
+      itemApi.getItemByGuid(guid).then((_item) => updateState(_item));
     }
-  }, [props.match.params.guid]);*/
+  }, [props.match.params.guid]);
 
-  function handleChange({ target }) {
+  /*function handleChange({ target }) {
     setItem({
       ...item,
       [target.name]: target.value,
     });
-  }
+  }*/
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(item);
+    console.log(state);
   }
 
   return (
     <div className="container mt-3">
       <h2>
-        {item.guid
-          ? "Ajout d'un nouveau article"
-          : "Modification d'un nouveau article"}
+        {state.guid
+          ? "Modification d'un article"
+          : "Ajout d'un nouveau article"}
       </h2>
-      <ItemForm item={item} onChange={handleChange} onSubmit={handleSubmit} />
+      <ItemForm item={state} onChange={updatedForm} onSubmit={handleSubmit} />
     </div>
   );
 };
