@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 //import Input from "./common/Input";
 
 const ItemForm = (props) => {
@@ -14,6 +15,7 @@ const ItemForm = (props) => {
               name="title"
               value={props.item.title}
               onChange={props.onChange}
+              required
             />
           </div>
           {/*<Input label={"Titre"} value={props.item.title} name={"title"} type={"text"} onChange={props.onChange} />*/}
@@ -262,5 +264,14 @@ const ItemForm = (props) => {
     </form>
   );
 };
+
+
+
+ItemForm.prototype={
+  item:PropTypes.object.isRequired,
+  onSubmit:PropTypes.func.isRequired,
+  onChange:PropTypes.func.isRequired,
+  errors:PropTypes.func.isRequired
+}
 
 export default ItemForm;

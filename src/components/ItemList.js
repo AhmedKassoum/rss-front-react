@@ -12,10 +12,10 @@ const ItemList = (props) => {
       <td>{props.item.date}</td>
       <td>
         <div className="row-cols-2">
-          <a className="btn btn-sm" href={"/item-details/" + props.guid}>
+          <a className="btn btn-sm" href={"/item-details/" + props.item.guid}>
             <i className="fa fa-solid fa-eye"></i>
           </a>
-          <a className="btn btn-sm" href={"/item-details/" + props.guid}>
+          <a className="btn btn-sm" href={"/item-details/" + props.item.guid}>
             <i className="fa fa-duotone fa-trash"></i>
           </a>
         </div>

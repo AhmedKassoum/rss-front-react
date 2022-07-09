@@ -1,6 +1,6 @@
 import produce from "immer";
 import { has, set } from "lodash";
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import * as itemApi from "../api/itemApi";
 import ItemForm from "./ItemForm";
 
@@ -48,11 +48,9 @@ const initialState = {
     uri: "",
   },
 };
-
 const ManageItem = (props) => {
-  
-
   const [state, updateState] = useReducer(enchancedReducer, initialState);
+  const [errors, setErrors] = useState({});
 
   const updatedForm = React.useCallback(({ target: { value, name, type } }) => {
     const updatePath = name.split(".");
@@ -86,8 +84,17 @@ const ManageItem = (props) => {
     });
   }*/
 
+  function formIsValid(){
+    const _errors={};
+
+    if (!state.title) _errors.title = "Title is required";
+    setErrors(_errors);
+    return Object.keys(_errors).length === 0;
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
+    if(!formIsValid) return;
     console.log(state);
   }
 
@@ -98,7 +105,7 @@ const ManageItem = (props) => {
           ? "Modification d'un article"
           : "Ajout d'un nouveau article"}
       </h2>
-      <ItemForm item={state} onChange={updatedForm} onSubmit={handleSubmit} />
+      <ItemForm item={state} onChange={updatedForm} onSubmit={handleSubmit} errors={errors} />
     </div>
   );
 };
