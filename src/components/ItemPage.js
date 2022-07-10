@@ -10,6 +10,10 @@ const ItemPage = () => {
     });
   }, []);
 
+  function deleteItem(guid){
+    console.log("THIS FUNCTION WILL DELETE ITEM WITH ID = "+guid);
+  }
+
   return (
     <div className="container-fluid">
       <div className="mt-5">
@@ -26,7 +30,7 @@ const ItemPage = () => {
           <tbody>
             {
                 items.map((item)=>(
-                    <ItemList item={item} key={item.guid} />
+                    <ItemList item={item} key={item.guid} deleteItem={deleteItem} />
                 ))
             }
           </tbody>
