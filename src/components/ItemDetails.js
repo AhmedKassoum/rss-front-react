@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import * as itemApi from "../api/itemApi";
 
-const ItemDetails = (props) => {
-  const [item, setItem] = useState({});
 
-  useEffect(() => {
-    console.log("oooo");
-    const guid = props.match.params.guid;
-    if (guid) {
-      itemApi.getItemByGuid(guid).then((_item) => setItem(_item));
-    }
-  }, [props.match.params.guid]);
+const ItemDetails = (props) => {
+
+  const [item, setItem]=useState();
+
+  useEffect(()=>{
+    const guid=props.match.params.guid;
+    itemApi.getItemByGuid(guid).then(_item=>setItem(_item));
+  },[props.match.params.guid])
 
   return (
     <div>

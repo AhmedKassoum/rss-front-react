@@ -58,8 +58,8 @@ const items = [
       "Une pluie de sable est tombée dans plusieurs départements de la France, mardi 15 février.",
     category: "Planete",
     dateType: "Published",
+    date: "2018-01-29T17:52:00",
     image: {
-      date: "2018-01-29T17:52:00",
       url: "https://www.francetvinfo.fr/pictures/dF8dhRK9c9MK6Tw2bgsBx_vl8uw/0x52:1024x628/944x531/ filters:format(webp)/2022/03/15/phpZbllC7.jpg",
       type: "jpeg",
       taille: 644,
